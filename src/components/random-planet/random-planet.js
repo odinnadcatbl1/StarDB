@@ -5,6 +5,7 @@ import Spinner from '../spinner/spinner'
 import ErrorIndicator from '../error-indicator/error-indicator'
 
 import './random-planet.css';
+import { render } from '@testing-library/react';
 
 export default class RandomPlanet extends Component {
 
@@ -16,9 +17,9 @@ export default class RandomPlanet extends Component {
     error: false
   };
 
-  constructor() {
-    super();
+  componentDidMount() {
     this.updatePlanet();
+    this.interval = setInterval(this.updatePlanet, 5000);
   }
 
   onPlanetLoaded = (planet) => {
@@ -32,8 +33,8 @@ export default class RandomPlanet extends Component {
     });
   };
 
-  updatePlanet() {
-    const id = 10;
+  updatePlanet = () => {
+    const id = Math.floor(Math.random()*25) + 3;
     this.swapiService
       .getPlanet(id)
       .then(this.onPlanetLoaded)
@@ -89,3 +90,4 @@ const PlanetView = ( {planet} ) => {
     </React.Fragment>
   );
 }
+
