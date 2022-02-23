@@ -42,7 +42,7 @@ export default class PersonDetails extends Component {
     const { person, loading } = this.state;
 
     if (!person) {
-      return <span>Select a person from list</span>
+      return <span>Select a person from a list</span>
     }
 
     const spinner = loading ? <Spinner /> : null;
