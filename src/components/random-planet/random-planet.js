@@ -5,8 +5,6 @@ import Spinner from '../spinner/spinner'
 import ErrorIndicator from '../error-indicator/error-indicator'
 
 import './random-planet.css';
-import { render } from '@testing-library/react';
-
 export default class RandomPlanet extends Component {
 
   swapiService = new SwapiService();
@@ -25,6 +23,7 @@ export default class RandomPlanet extends Component {
   componentWillUnmount() {
     clearInterval(this.interval);
   }
+
   onPlanetLoaded = (planet) => {
     this.setState({ planet, loading: false });
   };
