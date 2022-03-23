@@ -10,7 +10,6 @@ const withData = (View) => {
       }
     
       componentDidMount() {
-console.log('fd', this.props);
         this.props.getData
           .then((data) => {
             this.setState({data});
