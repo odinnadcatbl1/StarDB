@@ -15,6 +15,7 @@ export default class SwapiService {
 
   getAllPeople = async () => {
     const res = await this.getResource(`/people/`);
+    console.log(res);
     return res.results
       .map(this._transformPerson)
       .slice(0, 5);
