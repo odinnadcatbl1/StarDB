@@ -5,27 +5,17 @@ import RandomPlanet from '../random-planet/random-planet';
 import ErrorBoundry from '../error-boundry/error-boundry';
 import SwapiService from '../../services/swapi-service';
 import DummySwapiService from '../../services/dummy-swapi-service';
-import ItemDetails, {Record} from '../item-details/item-details';
-
 import { SwapiServiceProvider } from '../swapi-service-context/swapi-service-context';
-
-import {
-  PersonDetails,
-  PlanetDetails,
-  StarshipDetails,
-  PersonList,
-  PlanetList,
-  StarshipList
-} from '../sw-components/index';
-
+import PeoplePage from '../pages/people-page';
+import StarshipsPage from '../pages/starships-page';
+import PlanetsPage from '../pages/planets-page';
 
 import './app.css';
 
 export default class App extends Component {
 
   state = {
-    showRandomPlanet: true,
-    swapiService: new DummySwapiService()
+    swapiService: new SwapiService()
   };
 
   onServiceChange = () => {
@@ -38,34 +28,16 @@ export default class App extends Component {
     }); 
   };
 
-  toggleRandomPlanet = () => {
-    this.setState((state) => {
-      return {
-        showRandomPlanet: !state.showRandomPlanet
-      }
-    });
-  };
-
   render() {
-
-    const planet = this.state.showRandomPlanet ?
-      <RandomPlanet/> :
-      null;
-
     return (
       <ErrorBoundry>
         <SwapiServiceProvider value={this.state.swapiService}>
           <div className="stardb-app">
             <Header onServiceChange={this.onServiceChange}/>
-
-            <PersonDetails itemId={5} />
-            <PlanetDetails itemId={5} />
-            <StarshipDetails itemId={9} />
-
-            <PersonList />
-            <PlanetList />
-            <StarshipList />
-
+            <RandomPlanet/>
+            <PeoplePage/>
+            <PlanetsPage/>
+            <StarshipsPage/>
           </div>
         </SwapiServiceProvider>
       </ErrorBoundry>

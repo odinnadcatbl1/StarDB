@@ -6,8 +6,10 @@ const withData = (View) => {
     return class extends Component {
   
       state = {
-        data: null
-      }
+        data: null,
+        loading: false,
+        error: false
+      };
     
       componentDidUpdate(prevProps) {
         if (this.props.getData !== prevProps.getData) {
@@ -20,15 +22,28 @@ const withData = (View) => {
       }
 
       update () {
+        this.setState({
+          loading: true,
+          error: false
+        });
         this.props.getData
         .then((data) => {
-          this.setState({data});
+          this.setState({
+            data,
+            loading: false,
+          });
+        })
+        .catch(() => {
+          this.setState({
+            error: true,
+            loading: false
+          });
         });
       }
 
       render() {
   
-        const {data} = this.state;
+        const {data, loading, error} = this.state;
   
         if (!data) {
           return <Spinner/>
