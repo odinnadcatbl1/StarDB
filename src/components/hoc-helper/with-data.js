@@ -7,7 +7,7 @@ const withData = (View) => {
   
       state = {
         data: null,
-        loading: false,
+        loading: true,
         error: false
       };
     
@@ -26,7 +26,8 @@ const withData = (View) => {
           loading: true,
           error: false
         });
-        this.props.getData
+
+        this.props.getData()
         .then((data) => {
           this.setState({
             data,
@@ -45,8 +46,12 @@ const withData = (View) => {
   
         const {data, loading, error} = this.state;
   
-        if (!data) {
+        if (loading) {
           return <Spinner/>
+        }
+
+        if (error) {
+          return <ErrorIndicator/>
         }
   
         return <View {...this.props} data={data} />;
