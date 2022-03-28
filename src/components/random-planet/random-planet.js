@@ -16,8 +16,9 @@ export default class RandomPlanet extends Component {
   };
 
   componentDidMount() {
+    const {updateInterval} = this.props;
     this.updatePlanet();
-    this.interval = setInterval(this.updatePlanet, 5000);
+    this.interval = setInterval(this.updatePlanet, updateInterval);
   }
 
   componentWillUnmount() {
@@ -61,6 +62,22 @@ export default class RandomPlanet extends Component {
     );
   }
 }
+
+RandomPlanet.defaultProps = {
+  updateInterval: 10000
+};
+// Проверка значений свойств
+RandomPlanet.propTypes = {
+  updateInterval: (props, propName, componentName) => {
+    const value = props[propName];
+
+    if (typeof value === 'number' && !isNaN(value)) {
+      return null;
+    }
+
+    return new TypeError(`${componentName}: ${propName} must be a number! `);
+  }
+};
 
 // react.fragment - позволяет обернуть несколько компонентов JSX, не создавая новых dom-elements
 const PlanetView = ( {planet} ) => {
