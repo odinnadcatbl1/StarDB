@@ -12,6 +12,7 @@ import PlanetsPage from '../pages/planets-page';
 
 import './app.css';
 
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 export default class App extends Component {
 
   state = {
