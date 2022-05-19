@@ -12,7 +12,7 @@ import { StarshipDetails } from '../sw-components';
 
 import './app.css';
 
-import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 export default class App extends Component {
 
   state = {
@@ -40,7 +40,8 @@ export default class App extends Component {
               
               <Routes>
                 <Route path="/" element={<h2>Welcome to StarDB</h2>} exact/>
-                <Route path="/people" element={<PeoplePage/>}/>
+                <Route path="/people/" element={<PeoplePage/>}/>
+                <Route path="/people/:id" element={<PeoplePage/>}/>
                 <Route path="/planets" element={<PlanetsPage/>}/>
                 <Route path="/starships" element={<StarshipsPage/>}/>
                 <Route path="/starships/:id" element={<StarshipDetails/>}/>
