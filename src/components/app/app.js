@@ -9,6 +9,8 @@ import PeoplePage from '../pages/people-page';
 import StarshipsPage from '../pages/starships-page';
 import PlanetsPage from '../pages/planets-page';
 import { StarshipDetails } from '../sw-components';
+import LoginPage from '../pages/login-page';
+import SecretPage from '../pages/secret-page';
 
 import './app.css';
 
@@ -16,8 +18,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 export default class App extends Component {
 
   state = {
-    swapiService: new SwapiService()
+    swapiService: new SwapiService(),
+    isLoggedIn: false,
   };
+
+  onLogin = () => {
+    this.setState({isLoggedIn: true});
+  }
 
   onServiceChange = () => {
     this.setState(({swapiService}) => {
@@ -27,7 +34,17 @@ export default class App extends Component {
         swapiService: new Service()
       };
     }); 
+  }; 
+
+  Secret = () => {
+    const {isLoggedIn} = this.state;
+    return (<SecretPage isLoggedIn={isLoggedIn}/>);
   };
+
+  Login = () => {
+    const {isLoggedIn} = this.state;
+    return (<LoginPage isLoggedIn={isLoggedIn} onLogin={this.onLogin}/>)
+  }
 
   render() {
     return (
@@ -45,6 +62,8 @@ export default class App extends Component {
                 <Route path="/planets" element={<PlanetsPage/>}/>
                 <Route path="/starships" element={<StarshipsPage/>}/>
                 <Route path="/starships/:id" element={<StarshipDetails/>}/>
+                <Route path="/login" element={<this.Login/>}/>
+                <Route path="/secret" element={<this.Secret/>}/>
               </Routes>
 
             </div>
