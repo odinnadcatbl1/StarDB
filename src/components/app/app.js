@@ -64,6 +64,7 @@ export default class App extends Component {
                 <Route path="/starships/:id" element={<StarshipDetails/>}/>
                 <Route path="/login" element={<this.Login/>}/>
                 <Route path="/secret" element={<this.Secret/>}/>
+                <Route path="*" element={<h2>Page not found</h2>}/>
               </Routes>
 
             </div>
